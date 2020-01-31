@@ -21,7 +21,7 @@
 ![](screenshots/03b1f500.png)
 2. 把src中的地址`https://aweme.snssdk.com/aweme/v1/playwm/?s_vid=93f1b41336a8b7a442dbf1c29c6bbc566643c365a1a8df9d3fa4bb99aa21ac37880d88309946b2a3782771c451bbd26b87f0d18011addfc5a65b2369772af4d8&line=0`复制出来，新开一个窗口请求一下看看，发现地址被重定向了，然后打开了视频播放页面，视频中有水印
 ![](screenshots/d44c2af1.png)
-3. 接着继续分析了一下此页面（电脑版），未发现什么有用的东西，在[这篇博客](https://blog.csdn.net/qq_28121913/article/details/102730184)的启发下，我尝试了一下移动端，然后发现了有一些有趣的东西，在浏览器f12的页面直接选中那个标红的按钮就可以切换到移动端模式，实际上是更改了请求的user-agent
+3. 接着继续分析了一下此页面（电脑版），未发现什么有用的东西，在[这篇博客](https://blog.csdn.net/qq_28121913/article/details/102730184)的启发下，我尝试了一下移动端，然后发现了一些有趣的东西，在浏览器f12的页面直接选中那个标红的按钮就可以切换到移动端模式，实际上是更改了请求的user-agent
 ![](screenshots/c4771500.png)
 4. 和那篇博客博主所采用的实现方式不一样，老实说，这博主的实现的方式有点麻烦，但是无意中也给了我一点启发，我最开始是循着博主的思路，用java实现了一遍，发现获取到的地址是这样`https://aweme.snssdk.com/aweme/v1/play/?video_id=v0200ff10000bopbhcuvld7780ioaq1g&line=0&ratio=540p&media_type=4&vr_type=0&improve_bitrate=0&is_play_url=1&is_support_h265=0&source=PackSourceEnum_PUBLISH
 `，单开一个电脑的页面来请求，发现直接无响应，但是没有403之类的，感觉有戏，于是单开一个手机端的页面，便拿到了没有水印的视频地址，然后我接着分析移动端的页面，还是那个熟悉的video标签，src中依然是视频的地址（拿出来`https://aweme.snssdk.com/aweme/v1/playwm/?s_vid=93f1b41336a8b7a442dbf1c29c6bbc566643c365a1a8df9d3fa4bb99aa21ac37880d88309946b2a3782771c451bbd26b87f0d18011addfc5a65b2369772af4d8&line=0`，请求，依然是有水印的视频）

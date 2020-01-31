@@ -1,8 +1,11 @@
 package wiki.zimo.douyinvideocrawler.service;
 
+import com.alibaba.fastjson.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
@@ -13,7 +16,10 @@ import java.net.URL;
 
 @Service
 public class CrawlerService {
-    public String demo(String url) throws IOException {
+    @Value("${BASE_API_URL}")
+    private String BASE_API_URL;
+
+    public String demo2(String url) throws IOException {
         HttpURLConnection conn = getConn(url);
         conn.connect();
         int code = conn.getResponseCode();
@@ -29,6 +35,47 @@ public class CrawlerService {
             if (code == HttpURLConnection.HTTP_MOVED_TEMP) {
                 String location = conn.getHeaderField("Location");
                 return location;
+            }
+        }
+        return null;
+    }
+
+    public String demo1(String url) throws IOException {
+        HttpURLConnection conn = getConn(url);
+        conn.connect();
+        int code = conn.getResponseCode();
+        if (code == HttpURLConnection.HTTP_OK) {
+            InputStream inputStream = conn.getInputStream();
+            String resultHtml = inputscreamToString(inputStream);
+            Document doc = Jsoup.parse(resultHtml);
+            Elements scriptElements = doc.getElementsByTag("script");
+            for (Element e : scriptElements) {
+                String text = e.toString();
+                if (text.contains("douyin_falcon:page/reflow_video/index")) {
+                    text = text.substring(text.indexOf('{'), text.lastIndexOf('}')).replaceAll("\\s+", "");
+                    text = text.substring(text.indexOf('{', text.indexOf(')')), text.lastIndexOf('}') + 1);
+                    JSONObject json = JSONObject.parseObject(text);
+                    String itemId = json.getString("itemId");
+                    String dytk = json.getString("dytk");
+                    url = BASE_API_URL.replace("{}", itemId);
+                    url = url.replace("{}", dytk);
+                    conn = getConn(url);
+                    conn.connect();
+                    code = conn.getResponseCode();
+                    if (code == HttpURLConnection.HTTP_OK) {
+                        text = inputscreamToString(conn.getInputStream());
+                        json = JSONObject.parseObject(text).getJSONArray("item_list").getJSONObject(0);
+                        json = json.getJSONObject("video").getJSONObject("play_addr_lowbr");
+                        url = json.getJSONArray("url_list").getString(0);//.replace("play", "playwm");
+                        conn = getConn(url);
+                        conn.connect();
+                        code = conn.getResponseCode();
+                        if (code == HttpURLConnection.HTTP_MOVED_TEMP) {
+                            String location = conn.getHeaderField("Location");
+                            return location;
+                        }
+                    }
+                }
             }
         }
         return null;

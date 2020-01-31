@@ -6,4 +6,4 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-
+BASE_API_URL: https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids={}&dytk={}

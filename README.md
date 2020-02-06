@@ -26,7 +26,7 @@
 4. 和那篇博客博主所采用的实现方式不一样，老实说，这博主的实现的方式有点麻烦，但是无意中也给了我一点启发，我最开始是循着博主的思路，用java实现了一遍，发现获取到的地址是这样`https://aweme.snssdk.com/aweme/v1/play/?video_id=v0200ff10000bopbhcuvld7780ioaq1g&line=0&ratio=540p&media_type=4&vr_type=0&improve_bitrate=0&is_play_url=1&is_support_h265=0&source=PackSourceEnum_PUBLISH
 `，单开一个电脑的页面来请求，发现直接无响应，但是没有403之类的，感觉有戏，于是单开一个手机端的页面，便拿到了没有水印的视频地址，然后我接着分析移动端的页面，还是那个熟悉的video标签，src中依然是视频的地址（拿出来`https://aweme.snssdk.com/aweme/v1/playwm/?s_vid=93f1b41336a8b7a442dbf1c29c6bbc566643c365a1a8df9d3fa4bb99aa21ac37880d88309946b2a3782771c451bbd26b87f0d18011addfc5a65b2369772af4d8&line=0`，请求，依然是有水印的视频）
 ![](screenshots/a905a701.png)
-5. 通过对比分析这三个链接，我发现从src中拿出来的链接无论是手机端还是电脑端都是一模一样的，然后和iteminfo接口中获取出来的最有意思的差别就在于`play`和`playwm`，这俩应该是一个对应电脑端，一个对应手机端的播放接口
+5. 通过对比分析这三个链接，我们可以发现从src中拿出来的链接无论是手机端还是电脑端都是一模一样的，然后和iteminfo接口中获取出来的最有意思的差别就在于`play`和`playwm`，这俩应该是一个对应电脑端，一个对应手机端的播放接口，而电脑端的播放接口有水印，手机端的接口没有水印，于是问题就简单了，我们**只需要请求手机端的播放接口即可**
 6. 于是我尝试直接拿src中的地址，将链接中的`playwm`直接替换为`play`，然后user-agent伪装成手机端设备请求，果然，成功了，哈哈哈
 7. 具体实现请看代码CrawlerService类中的`demo1`和`demo2`方法
 

@@ -37,8 +37,9 @@ public class CrawlerService {
                 JSONObject json = JSONObject.parseObject(text);
                 String itemId = json.getString("itemId");
                 String dytk = json.getString("dytk");
-                url = BASE_API_URL.replace("{}", itemId);
-                url = url.replace("{}", dytk);
+                String regex = "\\{\\}";
+                url = BASE_API_URL.replaceFirst(regex, itemId);
+                url = url.replaceFirst(regex, dytk);
                 conn = getConn(url);
                 text = conn.get().body().text();
                 json = JSONObject.parseObject(text).getJSONArray("item_list").getJSONObject(0);

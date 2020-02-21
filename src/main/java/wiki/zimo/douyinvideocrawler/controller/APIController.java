@@ -21,7 +21,11 @@ public class APIController {
         try {
             map.put("code", 0);
             map.put("msg", "analysis success");
-            map.put("url", crawler.demo2(url));
+            if (Math.random() > 0.5) {
+                map.put("url", crawler.demo1(url));
+            } else {
+                map.put("url", crawler.demo2(url));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code", 1);

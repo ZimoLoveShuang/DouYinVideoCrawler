@@ -13,8 +13,8 @@ import java.io.IOException;
 
 @Service
 public class CrawlerService {
-    @Value("${BASE_API_URL}")
-    private String BASE_API_URL;
+    @Value("${API_URL}")
+    private String API_URL;
 
     public String demo2(String url) throws IOException {
         Connection conn = getConn(url);
@@ -38,7 +38,7 @@ public class CrawlerService {
                 String itemId = json.getString("itemId");
                 String dytk = json.getString("dytk");
                 String regex = "\\{\\}";
-                url = BASE_API_URL.replaceFirst(regex, itemId);
+                url = API_URL.replaceFirst(regex, itemId);
                 url = url.replaceFirst(regex, dytk);
                 conn = getConn(url);
                 text = conn.get().body().text();

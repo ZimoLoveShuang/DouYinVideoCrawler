@@ -6,10 +6,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class DouyinvideocrawlerApplication extends SpringBootServletInitializer {
+public class DouYinVideoCrawlerApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(DouyinvideocrawlerApplication.class, args);
+        SpringApplication.run(DouYinVideoCrawlerApplication.class, args);
     }
 
     /**

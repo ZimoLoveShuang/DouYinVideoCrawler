@@ -11,7 +11,7 @@
 
 1. 使用浏览器，在地址栏输入，'http://www.zimo.wiki:8080/douyin-video-crawler/api/analysis?url='
 2. 打开抖音短视频APP，点开某个视频，点击右下角分享按钮，在分享弹框中点击复制链接
-3. 将复制的链接粘贴到第一步输入的链接的地址栏的最后，按<kbd>Enter</kbd>，正确的请求地址类似这样`http://www.zimo.wiki:8080/douyin-video-crawler/api/analysis?url=https://v.douyin.com/gU8REJ/`
+3. 将复制的链接粘贴到第一步输入的链接的地址栏的最后，按<kbd>Enter</kbd>，正确的请求地址类似这样`http://www.zimo.wiki:8080/douyin-video-crawler/api/analysis?url=https://v.douyin.com/gU8REJ/`或者这样`http://www.zimo.wiki:8080/douyin-video-crawler/api/analysis?url=%23%E5%9C%A8%E6%8A%96%E9%9F%B3%EF%BC%8C%E8%AE%B0%E5%BD%95%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%23%E5%BD%93%E6%88%91%E4%BB%AC%E6%8A%B1%E6%80%A8%E5%9B%B0%E5%9C%A8%E5%AE%B6%E9%87%8C%E7%9A%84%E6%97%B6%E5%80%99%20%E7%9F%A5%E8%B6%B3%E5%90%A7%20%E5%8F%88%E6%9C%89%E5%A4%9A%E5%B0%91%E4%BA%BA%E8%A2%AB%E5%9B%B0%E5%9C%A82020%20%20%E5%86%85%E5%AE%B9%E8%BF%87%E4%BA%8E%E7%9C%9F%E5%AE%9E%20%E9%83%BD%E5%90%AC%E8%AF%9D%E5%90%A7%EF%BC%81%20https://v.douyin.com/GfcRxD/%20%E5%A4%8D%E5%88%B6%E6%AD%A4%E9%93%BE%E6%8E%A5%EF%BC%8C%E6%89%93%E5%BC%80%E3%80%90%E6%8A%96%E9%9F%B3%E7%9F%AD%E8%A7%86%E9%A2%91%E3%80%91%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%A7%82%E7%9C%8B%E8%A7%86%E9%A2%91%EF%BC%81`
 4. 在返回的数据字段找到url对应的字段，此地址即为没有水印的小视频的真实地址
 5. 用浏览器请求url就可以看到无水印的小视频了
 

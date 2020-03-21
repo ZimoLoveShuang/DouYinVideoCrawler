@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
     <title>抖音小视频去水印</title>
 </head>
 <body>
@@ -26,6 +24,12 @@
     </div>
     <div class="row" id="success">
 
+    </div>
+    <div class="row" id="player-box" style="display: none;text-align: center;">
+        <video id="player" controls="controls" autoplay="autoplay"
+               style="width: 100%;margin-left: 5px;border-radius: 4px;">
+            <source src="" type="video/mp4"/>
+        </video>
     </div>
 </div>
 </body>
@@ -48,12 +52,19 @@
                 type: 'post',
                 success: function (result) {
                     if (result.code != 0) {
-                        alert('解析失败' + result.msg);
+                        alert('解析失败 ' + result.msg);
                         window.location.reload();
                         return;
                     }
 
-                    $('#success').append("<p style='margin: 20px;'>解析成功 <a href='" + result.url + "'>播放</a></p>");
+                    $('textarea').val('');
+                    $('#player-box').css({'display': 'unset'});
+                    var videoSrc = result.url;
+                    var player = $('#player');
+                    player.attr('src', videoSrc);
+                    // player.play();
+
+                    // $('#success').append("<p style='margin: 20px;'>解析成功 <a href='" + result.url + "'>播放</a></p>");
 
                     $(context).button('reset');
                 }

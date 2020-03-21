@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="referrer" content="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
+    <title>抖音小视频去水印</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <form role="form" method="post" action="/api/analysis">
+            <div class="form-group">
+                <label for="url">输入在抖音复制的链接</label>
+                <textarea class="form-control" rows="3" name="url"></textarea>
+            </div>
+            <button class="btn btn-primary" data-loading-text="解析中，请稍等..."
+                    type="button"> 解析
+            </button>
+        </form>
+    </div>
+    <div class="row" id="success">
+
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    $(function () {
+        $(".btn").click(function () {
+            var url = $("textarea").val();
+            console.log(url)
+            if (url.toString().trim() == '') {
+                alert('不能为空');
+                return;
+            }
+
+            $(this).button('loading');
+            var context = this;
+
+            $.ajax({
+                url: /*[[${#servletContext.contextPath}+'/api/analysis']]*/ '',
+                data: {"url": url},
+                type: 'post',
+                success: function (result) {
+                    if (result.code != 0) {
+                        alert('解析失败' + result.msg);
+                    }
+
+                    $('#success').append("解析成功 <a href='" + result.url + "'>播放</a>");
+
+                    $(context).button('reset');
+                }
+            });
+        });
+    });
+</script>
+</html>

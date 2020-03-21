@@ -14,13 +14,13 @@
 <body>
 <div class="container">
     <div class="row">
-        <form role="form" method="post" action="/api/analysis">
-            <div class="form-group">
+        <form class="form-horizontal" role="form" method="post" action="/api/analysis">
+            <div class="form-group" style="margin: 20px;">
                 <label for="url">输入在抖音复制的链接</label>
                 <textarea class="form-control" rows="3" name="url"></textarea>
             </div>
             <button class="btn btn-primary" data-loading-text="解析中，请稍等..."
-                    type="button"> 解析
+                    type="button" style="margin-left: 20px;"> 解析
             </button>
         </form>
     </div>
@@ -49,6 +49,8 @@
                 success: function (result) {
                     if (result.code != 0) {
                         alert('解析失败' + result.msg);
+                        window.location.reload();
+                        return;
                     }
 
                     $('#success').append("解析成功 <a href='" + result.url + "'>播放</a>");

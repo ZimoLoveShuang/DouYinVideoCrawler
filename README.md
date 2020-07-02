@@ -2,28 +2,31 @@
 
 抖音无水印小视频解析真实地址的demo（java），附上原理
 
-# 效果
+# 部署
 
-1. 请使用浏览器访问，[这里](http://www.zimo.wiki:8080/douyin-video-crawler/api/analysis?url=https://v.douyin.com/gU8REJ/)
-2. 复制返回字段url中的链接在新窗口打开，即可看到没有水印的小视频，此url即为小视频真实地址（此地址大约在第二天就会失效，猜测应该是0点自动刷新token吧，此想法未验证）
+将项目打包为`war`丢进容器中即可
 
 # 用法
 
-1. 使用浏览器，访问，`http://www.zimo.wiki:8080/douyin-video-crawler`
+1. 部署后使用浏览器，访问，`http://host:port/douyin-video-crawler`
 ![](screenshots/32e9b4f3.png)
 2. 打开抖音短视频APP，点开某个视频，点击右下角分享按钮，在分享弹框中点击复制链接
 3. 将复制的链接粘贴到输入框
 4. 点击解析
+5. `host`为你的服务器IP地址
+6. `port`为你的服务器端口，默认是8080
 
 # API
 ```shell script
-http://www.zimo.wiki:8080/douyin-video-crawler/api/analysis?url={}
+http://host:port/douyin-video-crawler/api/analysis?url={}
 ```
 支持两种方式：
 
 1. url参数是截取的链接`https://v.douyin.com/GfcRxD/`，这种方式不用转码
 2. url参数是utf-8编码后的中文`%23%E5%9C%A8%E6%8A%96%E9%9F%B3%EF%BC%8C%E8%AE%B0%E5%BD%95%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%23%E5%BD%93%E6%88%91%E4%BB%AC%E6%8A%B1%E6%80%A8%E5%9B%B0%E5%9C%A8%E5%AE%B6%E9%87%8C%E7%9A%84%E6%97%B6%E5%80%99+%E7%9F%A5%E8%B6%B3%E5%90%A7+%E5%8F%88%E6%9C%89%E5%A4%9A%E5%B0%91%E4%BA%BA%E8%A2%AB%E5%9B%B0%E5%9C%A82020++%E5%86%85%E5%AE%B9%E8%BF%87%E4%BA%8E%E7%9C%9F%E5%AE%9E+%E9%83%BD%E5%90%AC%E8%AF%9D%E5%90%A7%EF%BC%81+https%3A%2F%2Fv.douyin.com%2FGfcRxD%2F+%E5%A4%8D%E5%88%B6%E6%AD%A4%E9%93%BE%E6%8E%A5%EF%BC%8C%E6%89%93%E5%BC%80%E3%80%90%E6%8A%96%E9%9F%B3%E7%9F%AD%E8%A7%86%E9%A2%91%E3%80%91%EF%BC%8C%E7%9B%B4%E6%8E%A5%E8%A7%82%E7%9C%8B%E8%A7%86%E9%A2%91%EF%BC%81%0A`，这种方式需要编码
 3. 2中的编码的对应中文是`#在抖音，记录美好生活#当我们抱怨困在家里的时候 知足吧 又有多少人被困在2020  内容过于真实 都听话吧！ https://v.douyin.com/GfcRxD/ 复制此链接，打开【抖音短视频】，直接观看视频！`
+4. `host`为你的服务器IP地址
+5. `port`为你的服务器端口，默认是8080
 
 返回的json
 ```javascript
